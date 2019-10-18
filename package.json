@@ -1,5 +1,5 @@
 {
-  "name": "newsite",
+  "name": "playground",
   "version": "1.0.0",
   "description": "ZURB Template Variant Used by FM",
   "main": "gulpfile.babel.js",
@@ -43,10 +43,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/SCarrero/newsite.git"
+    "url": "https://github.com/marlon-shaw/playground.git"
   },
   "bugs": {
-    "url": "https://github.com/SCarrero/newsite/issues"
+    "url": "https://github.com/marlon-shaw/playground/issues"
   },
   "private": true
 }

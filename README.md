@@ -1,4 +1,4 @@
-# Starter New Site Web Template
+# This is just a playground
 Based on v6.5 of Foundation *with Webpack omitted*
 
 This is a variant of the [ZURB Foundation Template for Sites](https://github.com/zurb/foundation-zurb-template).  It has a Gulp-powered build system with these features:
@@ -10,7 +10,4 @@ This is a variant of the [ZURB Foundation Template for Sites](https://github.com
 - Style Sherpa style guide generator
 - Poduction builds also include CSS and JS compression
 
-## Create a New Repo
 
-To create a new repo using this template, refer to [Creating a repository from a template
-](https://help.github.com/en/articles/creating-a-repository-from-a-template).
