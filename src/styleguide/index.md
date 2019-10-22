@@ -103,7 +103,7 @@ In the Grid you can nest cells down as far as you'd like. Just embed grid-x insi
 
 As you've probably noticed in the examples above, you have access to a small, medium, and large grid. If you know that your grid structure will be the same for small devices as it will be on large devices, just use the small grid. You can override your small grid classes by adding medium or large grid classes.
 
-```html
+```html_example
 <div class="grid-x">
   <div class="small-2 cell">2</div>
   <div class="small-10 cell">10, last</div>
@@ -114,14 +114,7 @@ As you've probably noticed in the examples above, you have access to a small, me
 </div>
 ```
 
-<div class="grid-x display">
-  <div class="small-2 cell">2</div>
-  <div class="small-10 cell">10, last</div>
-</div>
-<div class="grid-x display">
-  <div class="small-3 cell">3</div>
-  <div class="small-9 cell">9, last</div>
-</div>
+
 
 
 
@@ -184,7 +177,7 @@ Paragraphs are groups of sentences, each with a lead (first sentence) and transi
 
 ---
 
-<h1>Heading Level 1</h1>
+<div><h1>Heading Level 1</h1></div>
 
 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic quibusdam ratione sunt dolorum, qui illo maxime doloremque accusantium cum libero eum, a optio odio placeat debitis ullam aut non distinctio.
 
