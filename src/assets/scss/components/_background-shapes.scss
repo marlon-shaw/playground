@@ -1,0 +1,28 @@
+/* background shapes */
+@media screen {
+  @each $name, $color in $hz-palette {
+    .#{$name} {
+      background-color: $color;
+    }    
+  }
+}
+/*
+.hz{
+	background-color: #bae8e8;
+}
+*/
+.hz::before{
+	transform: skewY(-7deg);
+	transform-origin: 0 0;
+}
+.hz::before{
+	background: inherit;
+    content: '';
+    display: block;
+    height: 50%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    padding:15% 0;
+}
