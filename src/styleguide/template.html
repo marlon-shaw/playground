@@ -25,50 +25,38 @@
     <link rel="stylesheet" href="/special/styleguide/files/styleguide.css">
   </head>
   <body>
-    <div class="show-for-print">Domain.com</div>     
-    <div class="iw_section"> 
-      <div class="row iw_row iw_stretch"> 
-        <div class="columns iw_columns large-12"> 
-          <div class="iw_component">  
-            <div id="top" class="page-title row-wrapper">
-              <div class="row">
-                <div class="column">
-                  <form class="form float-right">
-                    <select id="ssnav">
-                      <option value="">Select Component</option>
-                      {{#each pages}}
-                        <option value="#{{ anchor }}">{{ title }}</option>
-                      {{/each}}
-                    </select>
-                  </form>
-                  <h1 class="subtitle">Style Guide</h1>
-                </div>
-              </div>
-            </div> 
-          </div>
+    <div class="show-for-print">Domain.com</div>        
+    <div id="top" class="page-title row-wrapper" style="background: red;">
+      <div class="row">
+        <div class="column">
+          <form class="form">
+            <select id="ssnav">
+              <option value="">Select Component</option>
+              {{#each pages}}
+                <option value="#{{ anchor }}">{{ title }}</option>
+              {{/each}}
+            </select>
+          </form>
+          <h1 class="subtitle">Style Guide</h1>
         </div>
       </div>
-    </div>
-    <div class="iw_section"> 
-      <div class="row iw_row iw_stretch"> 
-        <div class="columns iw_columns large-12"> 
-          <div class="iw_component">    
-            <div class="gutter-top" id="code-content">
-              <p class="gutter-all"></p>
-              {{#each pages}}
-                <div class="ss-section row-wrapper" id="{{ anchor }}">
-                  <div class="row">
-                    <div class="column markup-wrapper">
-                    {{ body }}
-                    </div>
-                  </div>
-                </div>
-              {{/each}}
+    </div>        
+    <div class="gutter-top" id="code-content">
+      <p class="gutter-all"></p>
+      {{#each pages}}
+        <div class="ss-section row-wrapper" id="{{ anchor }}">
+          <div class="row">
+            <div class="column markup-wrapper">
+            {{ body }}
             </div>
           </div>
         </div>
-      </div>
+      {{/each}}
     </div>
+          
+        
+      
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script>
     window.jQuery || document.write('<script src="/js/vendor/jquery-3.4.1.min.js"><\/'+'script>');

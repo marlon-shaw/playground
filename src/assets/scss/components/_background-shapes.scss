@@ -11,11 +11,11 @@
 	background-color: #bae8e8;
 }
 */
-.hz::before{
+.hz::after{
 	transform: skewY(-7deg);
 	transform-origin: 0 0;
 }
-.hz::before{
+.hz::after{
 	background: inherit;
     content: '';
     display: block;
@@ -25,4 +25,18 @@
     right: 0;
     z-index: -1;
     padding:15% 0;
+}
+
+.wv::after{
+  	background: inherit;
+    content: '';
+    display: block;
+    height: 50%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    z-index: -1;
+    /*padding:15% 0;*/
+  	border-bottom-left-radius: 50% 20%;
+  	border-bottom-right-radius: 50% 20%;
 }

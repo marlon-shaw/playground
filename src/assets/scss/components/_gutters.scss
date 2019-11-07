@@ -1,15 +1,29 @@
 .gutter-top {
-	padding-top: 20px; 
+	padding-top: $gutter; 
 }
 .gutter-bottom {
-	padding-bottom: 20px; 
+	padding-bottom: $gutter; 
 }
 .gutter-left {
-	padding-left: 20px; 
+	padding-left: $gutter; 
 }
 .gutter-right {
-	padding-right: 20px; 
+	padding-right: $gutter; 
 }
 .gutter-all {
-	padding: 20px; 
+	
+	padding: $gutter; 
+}
+.gutter-multiply-all {
+	/*multiply gutter by 2*/
+	padding: $gutter * 2; 
+}
+.gutter-half-all {
+	/*divide gutter by 2*/
+	padding: $gutter / 2; 
+}
+
+.gutter-mixed {
+	/*set top*/
+	padding: rem-calc($gutter / 2 $gutter * 2 ); 
 }
