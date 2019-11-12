@@ -77,6 +77,13 @@ function styleGuide(done){
     template: 'src/styleguide/template.html'
   }, done );  
 }
+//Enter new styleguide here when ready "styleGuideII".
+function styleGuideI(done){
+  return sherpa('src/styleguide/siteI.md',{
+    output: PATHS.dist + '/special/styleguide/siteI.html',
+    template: 'src/styleguide/template.html'
+  }, done );
+}
 
 // Compile Sass into CSS
 // In production, the CSS is compressed

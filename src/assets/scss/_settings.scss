@@ -71,10 +71,14 @@ $global-lineheight: 1.5;
 $foundation-palette: (
   primary: #1779ba,
   secondary: #767676,
-  success: #3adb76,
-  warning: #ffae00,
   alert: #cc4b37,
 );
+$hz-palette: (
+  primary: #bae8e8,
+  secondary: #e3f6f5,
+  tertiary: #2c698d,
+);
+$primary-color: #2c698d;
 $light-gray: #e6e6e6;
 $medium-gray: #cacaca;
 $dark-gray: #8a8a8a;
@@ -99,7 +103,7 @@ $global-button-cursor: auto;
 $global-color-pick-contrast-tolerance: 0;
 $print-transparent-backgrounds: true;
 
-@include add-foundation-colors;
+//@include add-foundation-colors;
 $print-hrefs: true;
 
 // 2. Breakpoints
@@ -124,6 +128,7 @@ $grid-column-gutter: (
   small: 20px,
   medium: 30px,
 );
+$gutter: 20px;
 $grid-column-align-edge: true;
 $grid-column-alias: 'columns';
 $block-grid-max: 8;
@@ -280,7 +285,7 @@ $breadcrumbs-item-separator-color: $medium-gray;
 // ----------
 
 $button-font-family: inherit;
-$button-padding: 0.85em 1em;
+$button-padding: 1.5em 1em;
 $button-margin: 0 0 $global-margin 0;
 $button-fill: solid;
 $button-background: $primary-color;
@@ -290,12 +295,17 @@ $button-color-alt: $black;
 $button-radius: $global-radius;
 $button-hollow-border-width: 1px;
 $button-sizes: (
-  tiny: 0.6rem,
   small: 0.75rem,
   default: 0.9rem,
   large: 1.25rem,
 );
-$button-palette: $foundation-palette;
+$button-palette: (
+  primary: red,
+  secondary: green,
+  success: purple,
+  warning: orange,
+  alert: #cc4b37,
+);
 $button-opacity-disabled: 0.25;
 $button-background-hover-lightness: -20%;
 $button-hollow-hover-lightness: -50%;
@@ -487,9 +497,9 @@ $menu-icons-back-compat: true;
 $meter-height: 1rem;
 $meter-radius: $global-radius;
 $meter-background: $medium-gray;
-$meter-fill-good: $success-color;
-$meter-fill-medium: $warning-color;
-$meter-fill-bad: $alert-color;
+$meter-fill-good: green;
+$meter-fill-medium: orange;
+$meter-fill-bad: red;
 
 // 25. Off-canvas
 // --------------
