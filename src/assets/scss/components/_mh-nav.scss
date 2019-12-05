@@ -5,10 +5,28 @@
   background-color: #bae8e8;
 }
 .header{
-  padding:40px;
+  padding:15px;
   height:95vh;
 }
 .nav{
   padding:20px;
   width:15%;
+  float: left;
+  display: inline;
+}
+.hamburger-container{
+  float: left;
+  display: inline-block;
+}
+.text-align-left{
+  text-align: left;
+}
+.tile{
+  border-radius: 5%;
+  width: 150px;
+  height: 150px;
+  background-color: $off-white  ;
+  border: 1px solid $medium-gray;
+  padding:20px;
+  text-align: center;
 }

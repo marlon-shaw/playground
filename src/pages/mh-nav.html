@@ -3,9 +3,35 @@ title: MyHome Nav Sample
 layout: default
 ---
 <div class="header background-primary">
-  <div class="nav background-white">
-    <div class="nav-content-container">
-      My<span class="accent-primary">Home</span>
+  <div class="grid-x">
+    <div class="cell small-11">
+      <div class="nav background-white">
+        <div class="nav-content-container">
+          My<span class="accent-primary">Home</span>
+        </div>    
+      </div>          
     </div>
+    <div class="cell small-1">
+      <div class="hamburger-container">
+          <button class="hamburger-icon" type="button">
+            <!--hamburger icon // mixin.scss -->
+          </button>
+        </div>
+    </div>
+  </div>
+  <div class="grix-x">
+    <div class="cell">
+      <div class="search-box">
+        search box goes here
+      </div>
+    </div>
+  </div>
+  <div class="grid-x grid-padding-x menu-containter large-up-5" >
+    <div class="cell tile">
+      One
+    </div> 
+    <div class="cell tile">
+      Two
+    </div>  
   </div>
 </div>
