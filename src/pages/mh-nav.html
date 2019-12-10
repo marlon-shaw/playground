@@ -2,10 +2,57 @@
 title: MyHome Nav Sample
 layout: default
 ---
-<div class="header background-primary">
-  <div class="nav background-white">
-    <div class="nav-content-container">
-      My<span class="accent-primary">Home</span>
+<div class="background-primary grid-frame grid-y">
+  
+    <div class="grid-x grid-margin-y">
+      <div class="cell">
+        <div class="hamburger-container position-absolute">
+          <button class="hamburger-icon" type="button">
+            <!--hamburger icon // mixin.scss -->
+          </button>
+        </div>
+      </div>
+    </div> 
+
+  
+  <div class="grid-x">    
+    <div class="cell">
+      <div class="brand-container background-white position-absolute">
+        
+        <div class="brand">
+            My<span class="accent-primary">Home</span>
+        </div>
+           
+      </div>          
+    </div>    
+  </div>
+
+  <div class="search-container">
+    <form class="position-relative mh-search" action="">
+      <div class="grid-container">
+        <div class="grix-x">
+          <div class="cell small-centered medium-6">
+            <div class="search-container">
+                <input type="search" placeholder="search">
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="grid-x">
+    <div class="cell small-centered small-11">
+      <div class="grid-x grid-margin-x grid-margin-y small-up-2 medium-up-3 large-up-6 position-relative tile-container"> 
+        <div class="cell tile">One</div> 
+        <div class="cell tile">Two</div> 
+        <div class="cell tile">Three</div> 
+        <div class="cell tile">four</div> 
+        <div class="cell tile">five</div> 
+        <div class="cell tile">six</div>    
+      </div>
     </div>
   </div>
+
+  
 </div>

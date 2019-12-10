@@ -1,3 +1,8 @@
 // custom mixins
+.hamburger-icon{
+  margin:10px;
+  @include hamburger($black, $dark-gray, 20px, 16px, 2px, 3);
+}
+
 
  
