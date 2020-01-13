@@ -4,7 +4,7 @@
 // Foundation.Accordion.defaults.allowAllClosed = true;
 // Foundation.Abide.defaults.patterns['tel'] = /^\(?\d{3}\)?[\s+|-]?\d{3}[\s+|-]?\d{4}/;
 // 
-
+/*
 $(document).foundation(); 
 
 TweenLite.set(overlay, {y:0, yPercent:-100});
@@ -22,3 +22,4 @@ $('#close').on('click',
       yPercent: -100
     });
   });
+  */
