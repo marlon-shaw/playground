@@ -25,3 +25,6 @@ PATHS:
   javascript:  
     # Paths to your own project code are here  
     - "src/assets/js/app.js"
+  javascriptAnimations:
+    # Path to my js animation code
+    - "src/assets/js/hhb_animation.js"
