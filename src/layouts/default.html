@@ -46,13 +46,16 @@
     <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
     <link rel="stylesheet" href="/ss/app.css" />
+    {{!-- output link to extra stylesheet, if one is defined --}}
+
     {{#if (isString stylesheet) }}
       <link rel="stylesheet" href="{{stylesheet}}" />
     {{else}}
       {{#each stylesheet}}
       <link rel="stylesheet" href="{{.}}" />
       {{/each}}    
-    {{/if}}    
+    {{/if}}  
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900" rel="stylesheet" />  
   </head>  
   {{#if bodyclass}}
   <body class="{{ bodyclass }}">
