@@ -1,10 +1,15 @@
+
 $(document).ready(function () {
   var 
     $dollarContainer = $('#dollar-icon'),
-    $docContainer = $('#documentIcon')
+    $docContainer = $('#documentIcon'),
+    $phoneContainer = $('#phone-container'),
     $topDollar = $('.top-dollar'),
     $arcArrows = $('#arc-arrows'),
     $hbContainer = $('#hamburger'),
+    $blobOne = $('.blob1'),
+    $blobTwo = $('.blob2'),
+    $docShadow = $('.document-shadow'),
     $lineOne = $('#line-one'),
     $lineTwo = $('#line-two'),
     $lineThree = $('#line-three'),
@@ -13,7 +18,6 @@ $(document).ready(function () {
     //$documentIcon = $('#documentIcon')
     ;
   
-  
 
   //create a tl
   var dollarTlEnter = new TimelineMax();
@@ -21,34 +25,47 @@ $(document).ready(function () {
   var docTlEnter = new TimelineMax();
   var docTlExit = new TimelineMax();
   var toggleMenu = new TimelineMax({paused: true, reversed:true});
+
+  //tl.to('#phone-hand', 1,{rotation:+=5,transformOrigin: "80% 2%"})
     
     dollarTlEnter
-    .set($topDollar,{rotation:15, transformOrigin:"50% 50%"})
+    //.set($topDollar,{rotation:8, transformOrigin:"50% 50%"})
       $($dollarContainer).mouseenter(function () {
         console.log('You hovered the dollar');
-        dollarTlEnter             
-          .to($topDollar, 1, {rotation: "+=5", transformOrigin: "50% 50%", ease:Power1.easeOutIn}, "rotateDollar")
-          .to($arcArrows, 1,{rotation:20, transformOrigin:"center"},"-=.25")      
+        dollarTlEnter
+          .fromTo($blobOne,{scaleY:.75},{scaleY:.9, duration:.5, ease:Power1.easeInOut, transformOrigin:"center center"})              
+          .fromTo($topDollar, {rotation:5}, {rotation:20, duration:.6, ease:Power1.easeInOut, transformOrigin:"center center"},"-=.75")
+          .fromTo($arcArrows, {rotationX:"0"},{rotation:20, duration:.5, transformOrigin:"center center"},"-=1")   
+           
+          
       });
     dollarTlExit
       $($dollarContainer).mouseleave(function(){
         console.log('You are no longer hovering dollar');
           dollarTlExit
-          .to($topDollar, 0.75, { rotation: "-=5", transformOrigin: "50% 50%", ease:Power1.easeInOut}, "-=rotateDollar")
-          .to($arcArrows, 1,{rotation:0, transformOrigin:"center"},"-=rotateDollar");
+          .to($arcArrows, .5,{rotation:0, transformOrigin:"center center",ease:Power1.easeInOut}, ".8")
+          .fromTo($blobOne, {scaleY:1},{scaleY:.85,duration:1,ease:Power1.easeInOut}, "-=.5")
+          .to($topDollar, .25, { rotation:6, ease:Power1.easeOutIn},"-=.2")         
+          
       });
       
     docTlEnter
       $($docContainer).mouseenter(function(){
-        console.log('You have entered Doc');
+        console.log('You have entered Doc');        
         docTlEnter
-          .to($pen, {duration:0.75, rotation:5, transformOrigin: "bottom right", yoyo:true, repeat:-1})
+
+            .from($pen, .75, { x:-6, y:3})
+            .to($blobTwo, .75,{scaleX:1, transformOrigin:"center center"})
+            .fromTo($docShadow,{x:0},{x:-20, duration:1.25,ease:Power1.easeOutIn},"moveShadow")
         });
     docTlExit
       $($docContainer).mouseleave(function(){
         console.log('You have exited Doc');
         docTlExit
-          .to($pen, {duration:0.75, rotation:-15, transformOrigin: "bottom right"})
+          .fromTo($docShadow,{x:-15},{x:0, duration:.75},"-=moveShadow")
+          .to($pen, 1,{x:0, y:0, ease:Power1.easeOutIn})
+          //.fromTo($pen, {x:-20, y:0},{x:0, y:3 ,duration:1, ease:Power2.easeOut})
+          
       });
 
     toggleMenu
