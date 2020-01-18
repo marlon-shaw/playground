@@ -6,7 +6,12 @@ $(document).ready(function () {
     $phoneContainer = $('#phone-container'),
     $doorContainer = $('#door-container'),
     $hbContainer = $('#hamburger'),
-    $phoneHand = $('#phone-hand'),
+    //$heartOne = $('#heart-1'),
+    //$heartThree = $('#heart-3'),
+    //$house = $('#bubble-house-1_1_'),
+    //$houseOne = $('#bubble-house-1_2_'),
+    //$houseTwo = $('#bubble-house-2'),
+    $bubbles = $('.bubbles'),
     $topDollar = $('.top-dollar'),
     $arcArrows = $('#arc-arrows'),
     
@@ -16,6 +21,8 @@ $(document).ready(function () {
     $lineOne = $('#line-one'),
     $lineTwo = $('#line-two'),
     $lineThree = $('#line-three'),
+    //$hearts = [$heartOne, $heartThree],
+    //$houses = [$house, $houseOne, $houseTwo],
     $lines = [$lineOne, $lineTwo, $lineThree],
     $pen = $('#pen')
     //$documentIcon = $('#documentIcon')
@@ -23,7 +30,7 @@ $(document).ready(function () {
   
 
   //create a tl
-  var phoneEnter = gsap.timeline();
+  var phoneEnter = gsap.timeline({repeat:true});
   //var phoneExit = gsap.timeline();
   var dollarTlEnter = gsap.timeline({paused:true, reversed:true});
   var dollarTlExit = gsap.timeline();
@@ -31,16 +38,61 @@ $(document).ready(function () {
   var docTlExit = gsap.timeline();
   var toggleMenu = gsap.timeline({paused: true, reversed:true});
 
+  //establish the timelinee
+  phoneEnter
+      .set($bubbles, {onStart: onStart, onUpdate: onUpdate, repeat:-1})
+      //.set($houses, {x:-2, y:4, onStart: onStart, onUpdate: onUpdate})  
+
+      function onStart(){
+        phoneEnter
+        .fromTo('#bubble-house-1_2_', .5,
+          {x:-6, y:8, opacity:0},
+          {x:0, y:0, duration:0.15, opacity:1, scaleX:1, ease: "elastic.inout(1, 0.4)"})
+        .fromTo('#heart-3', .5,
+          {x:6, y:4, opacity:0},
+          {x:0, y:0, opacity:1, duration:0.4, ease: "elastic.inout(1, 0.4)"},'0.25')
+        
+        //.staggerFromTo($bubbles, .15,
+        //{opacity:1, rotation:0, ease:Back.easeIn},
+        //{opacity:0, rotation:5})
+        //.staggerFrom($bubbles, {opacity:0.5, duration:.15,rotation: -10, ease:Power1.easeInOut})
+      }
+      function onUpdate(){
+        phoneEnter    
+        .fromTo('#bubble-house-1_2_', 2.5,
+        {y:0, opacity:1},
+        {y:'-=100', opacity:0, ease: "steps(5)"}) 
+        .fromTo('#heart-3', 2.5,{y:0},{y:'-=100', ease: "steps(5)"},'-=2.5')
+        .fromTo('#bubble-house-2', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.5')
+        .fromTo('#heart-1', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
+        .fromTo('#bubble-house-1_1_', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
+
+        
+        
+        //.fromTo($bubbles, 1, 
+        //  {y:1},
+        //  {x:0, y:"-=15", opacity:1, ease:Power1.easeOut, stagger:.25, repeat: -1})
+        
+        //.to($bubbles, {opacity:1, x:0, y:-15, rotation:0, duration:1, stagger:0.5, repeat: -1, ease:Power1.easesOut},0.9)
+        
+        
+        
+        //.to($houses, {opacity:1, x:0, y:"-=30", rotation:0, duration:1.5, stagger:0.5, repeat: -1},'-=0.15')
+      }
+      function onComplete(){
+        phoneEnter
+      }
+  //pause the tl
+  phoneEnter.pause();
+  //target the tl based on user interaction
    $($phoneContainer).mouseenter(function(){
-     phoneEnter
-      .to($phoneHand, {duration:1, rotation:"+=5",transformOrigin: "bottom right", ease:Power1.easeInOut})
+     phoneEnter.play();
+   });
+   $($phoneContainer).mouseleave(function(){
+     phoneEnter.pause().progress(0);
    });
 
-   $($phoneContainer).mouseleave(function(){
-     phoneExit
-      .to($phoneHand, {duration:1,rotation:"-=5",transformOrigin: "bottom right", ease:Power1.easeOutIn})
-   });
-    
+        
    
       
       ($dollarContainer).mouseenter(function () {
