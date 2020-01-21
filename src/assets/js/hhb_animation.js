@@ -34,6 +34,7 @@ $(document).ready(function () {
 
   //create a tl
   var phoneEnter = new TimelineMax({repeat:-1});
+  var steppedEase  = new SteppedEase(4);
   //var phoneExit = new TimelineMax();
   var dollarTlEnter = new TimelineMax({paused:true, reversed:true});
   var dollarTlExit = new TimelineMax();
@@ -42,28 +43,32 @@ $(document).ready(function () {
   var toggleMenu = new TimelineMax({paused: true, reversed:true});
 
   //establish the timelinee
+  
   phoneEnter
-      .set($bubbles, {rotationY:0, onStart: onStart, onUpdate: onUpdate, onComplete: onComplete})      
-
+    
+      .set($bubbles, {onStart: onStart, onUpdate: onUpdate})      
       function onStart(){
         phoneEnter
-          .fromTo($heartFadeIn, .75, {x:2, y:40, opacity:0},{x:0, y:30, opacity:1})
           
-          .fromTo($houseOne, 0.25, {y:0},{y:-10})
-          .fromTo($houseFadeIn, .5, {x:-10, y:40, opacity:0},{x:0, y:30, opacity:1})
-          
-          .fromTo($heartThree, 0.5, {y:0},{y:-15})
-          //.to($houseOne, 0.5,{y:-20})
-          //.to($heartThree, 0.5, {y:-30})
-          //.to([$houseOne,$heartThree], .75,{y:-50})
-          .fromTo($staticSet, .5,{y:0},{y:-20}, '-=.25')
-          //.fromTo($house, .5,{opacity:1},{opacity:0},.8)
-          //.fromTo($staticSet, .5,{y:0},{y:-20}, '-=.25')
-          
-          
-          
+          .fromTo($heartFadeIn, 2,
+            {y:0},
+            {y:-50, ease:steppedEase}
+          )
+          .fromTo($houseFadeIn, 2,
+            {y:0},
+            {y:-50, ease:steppedEase},"-=1.75" 
+          )   
 
-        /*
+
+          /*
+          .fromTo($heartFadeIn, .75, {x:2, y:40, opacity:0},{x:0, y:30, opacity:1})       
+          .fromTo($houseOne, 0.25, {y:0},{y:-10})
+          .fromTo($heartThree, 0.5, {y:0},{y:-15})
+          .fromTo($staticSet, 1,{y:0},{y:-20},'-=1.25')
+          .fromTo($houseFadeIn, .5, {x:-10, y:40, opacity:0},{x:0, y:30, opacity:1})
+          */      
+          
+         /*
           .staggerFrom($bubbles, .5,{transformOrigin:"50% bottom", opacity:0, cycle:{x: [-5, 1], rotationY:[45, 180]}, ease:Back.easeIn, rotation:45}) 
           .staggerTo($bubbles, 1.5,{opacity:1, cycle:{y:[-25,-30]}}, '-=0.15')
         */
@@ -72,8 +77,12 @@ $(document).ready(function () {
       
       function onUpdate(){
         phoneEnter
-          .fromTo($heartFadeIn, 1,{y:30},{y:15})
-          .fromTo($houseFadeIn, 1,{y:30},{y:20})
+         
+          .to($houseOne, .5,{y:-10})
+          //.fromTo($houseFadeIn, .5,{y:30},{y:20})
+          //.fromTo($heartFadeIn, .5,{y:30},{y:15})
+
+
         /*.fromTo('#house-one', 2.5,
         {y:0, opacity:1},
         {y:'-=100', opacity:1, ease: "steps(5)"}) 
@@ -83,10 +92,7 @@ $(document).ready(function () {
         //.fromTo('#heart-1', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
         //.fromTo('#house-fade-out', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
       }
-      function onComplete(){
-        phoneEnter
-          .to([$houseFadeIn, $heartFadeIn],.25,{opacity:0})
-      }
+      
   //pause the tl
   phoneEnter.pause();
   //target the tl based on user interaction
