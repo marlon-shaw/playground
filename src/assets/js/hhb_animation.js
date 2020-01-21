@@ -6,11 +6,13 @@ $(document).ready(function () {
     $phoneContainer = $('#phone-container'),
     $doorContainer = $('#door-container'),
     $hbContainer = $('#hamburger'),
-    //$heartOne = $('#heart-1'),
-    //$heartThree = $('#heart-3'),
-    //$house = $('#bubble-house-1_1_'),
-    //$houseOne = $('#bubble-house-1_2_'),
-    //$houseTwo = $('#bubble-house-2'),
+    $heartOne = $('#heart-1'),
+    $heartThree = $('#heart-3'),
+    $heartFadeIn = $('#heart-fade-in'),
+    $houseFadeIn = $('#house-fade-in')
+    $house = $('#house-fade-out'),
+    $houseOne = $('#house-one'),
+    $houseTwo = $('#house-two'),
     $bubbles = $('.bubbles'),
     $topDollar = $('.top-dollar'),
     $arcArrows = $('#arc-arrows'),
@@ -21,6 +23,7 @@ $(document).ready(function () {
     $lineOne = $('#line-one'),
     $lineTwo = $('#line-two'),
     $lineThree = $('#line-three'),
+    $staticSet = [$heartOne,$houseTwo,$house] 
     //$hearts = [$heartOne, $heartThree],
     //$houses = [$house, $houseOne, $houseTwo],
     $lines = [$lineOne, $lineTwo, $lineThree],
@@ -30,57 +33,59 @@ $(document).ready(function () {
   
 
   //create a tl
-  var phoneEnter = gsap.timeline({repeat:true});
-  //var phoneExit = gsap.timeline();
-  var dollarTlEnter = gsap.timeline({paused:true, reversed:true});
-  var dollarTlExit = gsap.timeline();
-  var docTlEnter = gsap.timeline();
-  var docTlExit = gsap.timeline();
-  var toggleMenu = gsap.timeline({paused: true, reversed:true});
+  var phoneEnter = new TimelineMax({repeat:-1});
+  //var phoneExit = new TimelineMax();
+  var dollarTlEnter = new TimelineMax({paused:true, reversed:true});
+  var dollarTlExit = new TimelineMax();
+  var docTlEnter = new TimelineMax();
+  var docTlExit = new TimelineMax();
+  var toggleMenu = new TimelineMax({paused: true, reversed:true});
 
   //establish the timelinee
   phoneEnter
-      .set($bubbles, {onStart: onStart, onUpdate: onUpdate, repeat:-1})
-      //.set($houses, {x:-2, y:4, onStart: onStart, onUpdate: onUpdate})  
+      .set($bubbles, {rotationY:0, onStart: onStart, onUpdate: onUpdate, onComplete: onComplete})      
 
       function onStart(){
         phoneEnter
-        .fromTo('#bubble-house-1_2_', .5,
-          {x:-6, y:8, opacity:0},
-          {x:0, y:0, duration:0.15, opacity:1, scaleX:1, ease: "elastic.inout(1, 0.4)"})
-        .fromTo('#heart-3', .5,
-          {x:6, y:4, opacity:0},
-          {x:0, y:0, opacity:1, duration:0.4, ease: "elastic.inout(1, 0.4)"},'0.25')
-        
-        //.staggerFromTo($bubbles, .15,
-        //{opacity:1, rotation:0, ease:Back.easeIn},
-        //{opacity:0, rotation:5})
-        //.staggerFrom($bubbles, {opacity:0.5, duration:.15,rotation: -10, ease:Power1.easeInOut})
-      }
-      function onUpdate(){
-        phoneEnter    
-        .fromTo('#bubble-house-1_2_', 2.5,
-        {y:0, opacity:1},
-        {y:'-=100', opacity:0, ease: "steps(5)"}) 
-        .fromTo('#heart-3', 2.5,{y:0},{y:'-=100', ease: "steps(5)"},'-=2.5')
-        .fromTo('#bubble-house-2', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.5')
-        .fromTo('#heart-1', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
-        .fromTo('#bubble-house-1_1_', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
+          .fromTo($heartFadeIn, .75, {x:2, y:40, opacity:0},{x:0, y:30, opacity:1})
+          
+          .fromTo($houseOne, 0.25, {y:0},{y:-10})
+          .fromTo($houseFadeIn, .5, {x:-10, y:40, opacity:0},{x:0, y:30, opacity:1})
+          
+          .fromTo($heartThree, 0.5, {y:0},{y:-15})
+          //.to($houseOne, 0.5,{y:-20})
+          //.to($heartThree, 0.5, {y:-30})
+          //.to([$houseOne,$heartThree], .75,{y:-50})
+          .fromTo($staticSet, .5,{y:0},{y:-20}, '-=.25')
+          //.fromTo($house, .5,{opacity:1},{opacity:0},.8)
+          //.fromTo($staticSet, .5,{y:0},{y:-20}, '-=.25')
+          
+          
+          
 
-        
-        
-        //.fromTo($bubbles, 1, 
-        //  {y:1},
-        //  {x:0, y:"-=15", opacity:1, ease:Power1.easeOut, stagger:.25, repeat: -1})
-        
-        //.to($bubbles, {opacity:1, x:0, y:-15, rotation:0, duration:1, stagger:0.5, repeat: -1, ease:Power1.easesOut},0.9)
-        
-        
-        
-        //.to($houses, {opacity:1, x:0, y:"-=30", rotation:0, duration:1.5, stagger:0.5, repeat: -1},'-=0.15')
+        /*
+          .staggerFrom($bubbles, .5,{transformOrigin:"50% bottom", opacity:0, cycle:{x: [-5, 1], rotationY:[45, 180]}, ease:Back.easeIn, rotation:45}) 
+          .staggerTo($bubbles, 1.5,{opacity:1, cycle:{y:[-25,-30]}}, '-=0.15')
+        */
+      }
+      
+      
+      function onUpdate(){
+        phoneEnter
+          .fromTo($heartFadeIn, 1,{y:30},{y:15})
+          .fromTo($houseFadeIn, 1,{y:30},{y:20})
+        /*.fromTo('#house-one', 2.5,
+        {y:0, opacity:1},
+        {y:'-=100', opacity:1, ease: "steps(5)"}) 
+        .fromTo('#heart-3', 2.5,{y:0},{y:'-=100', ease: "steps(5)"},'-=2.5')
+        */
+        //.fromTo('#house-two', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.5')
+        //.fromTo('#heart-1', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
+        //.fromTo('#house-fade-out', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
       }
       function onComplete(){
         phoneEnter
+          .to([$houseFadeIn, $heartFadeIn],.25,{opacity:0})
       }
   //pause the tl
   phoneEnter.pause();
