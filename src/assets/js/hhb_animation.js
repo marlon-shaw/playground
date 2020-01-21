@@ -6,7 +6,14 @@ $(document).ready(function () {
     $phoneContainer = $('#phone-container'),
     $doorContainer = $('#door-container'),
     $hbContainer = $('#hamburger'),
-    $phoneHand = $('#phone-hand'),
+    $heartOne = $('#heart-1'),
+    $heartThree = $('#heart-3'),
+    $heartFadeIn = $('#heart-fade-in'),
+    $houseFadeIn = $('#house-fade-in')
+    $house = $('#house-fade-out'),
+    $houseOne = $('#house-one'),
+    $houseTwo = $('#house-two'),
+    $bubbles = $('.bubbles'),
     $topDollar = $('.top-dollar'),
     $arcArrows = $('#arc-arrows'),
     
@@ -16,6 +23,9 @@ $(document).ready(function () {
     $lineOne = $('#line-one'),
     $lineTwo = $('#line-two'),
     $lineThree = $('#line-three'),
+    $staticSet = [$heartOne,$houseTwo,$house] 
+    //$hearts = [$heartOne, $heartThree],
+    //$houses = [$house, $houseOne, $houseTwo],
     $lines = [$lineOne, $lineTwo, $lineThree],
     $pen = $('#pen')
     //$documentIcon = $('#documentIcon')
@@ -23,24 +33,77 @@ $(document).ready(function () {
   
 
   //create a tl
-  var phoneEnter = gsap.timeline();
-  //var phoneExit = gsap.timeline();
-  var dollarTlEnter = gsap.timeline({paused:true, reversed:true});
-  var dollarTlExit = gsap.timeline();
-  var docTlEnter = gsap.timeline();
-  var docTlExit = gsap.timeline();
-  var toggleMenu = gsap.timeline({paused: true, reversed:true});
+  var phoneEnter = new TimelineMax({repeat:-1});
+  var steppedEase  = new SteppedEase(4);
+  //var phoneExit = new TimelineMax();
+  var dollarTlEnter = new TimelineMax({paused:true, reversed:true});
+  var dollarTlExit = new TimelineMax();
+  var docTlEnter = new TimelineMax();
+  var docTlExit = new TimelineMax();
+  var toggleMenu = new TimelineMax({paused: true, reversed:true});
 
-   $($phoneContainer).mouseenter(function(){
-     phoneEnter
-      .to($phoneHand, {duration:1, rotation:"+=5",transformOrigin: "bottom right", ease:Power1.easeInOut})
-   });
-
-   $($phoneContainer).mouseleave(function(){
-     phoneExit
-      .to($phoneHand, {duration:1,rotation:"-=5",transformOrigin: "bottom right", ease:Power1.easeOutIn})
-   });
+  //establish the timelinee
+  
+  phoneEnter
     
+      .set($bubbles, {onStart: onStart, onUpdate: onUpdate})      
+      function onStart(){
+        phoneEnter
+          
+          .fromTo($heartFadeIn, 2,
+            {y:0},
+            {y:-50, ease:steppedEase}
+          )
+          .fromTo($houseFadeIn, 2,
+            {y:0},
+            {y:-50, ease:steppedEase},"-=1.75" 
+          )   
+
+
+          /*
+          .fromTo($heartFadeIn, .75, {x:2, y:40, opacity:0},{x:0, y:30, opacity:1})       
+          .fromTo($houseOne, 0.25, {y:0},{y:-10})
+          .fromTo($heartThree, 0.5, {y:0},{y:-15})
+          .fromTo($staticSet, 1,{y:0},{y:-20},'-=1.25')
+          .fromTo($houseFadeIn, .5, {x:-10, y:40, opacity:0},{x:0, y:30, opacity:1})
+          */      
+          
+         /*
+          .staggerFrom($bubbles, .5,{transformOrigin:"50% bottom", opacity:0, cycle:{x: [-5, 1], rotationY:[45, 180]}, ease:Back.easeIn, rotation:45}) 
+          .staggerTo($bubbles, 1.5,{opacity:1, cycle:{y:[-25,-30]}}, '-=0.15')
+        */
+      }
+      
+      
+      function onUpdate(){
+        phoneEnter
+         
+          .to($houseOne, .5,{y:-10})
+          //.fromTo($houseFadeIn, .5,{y:30},{y:20})
+          //.fromTo($heartFadeIn, .5,{y:30},{y:15})
+
+
+        /*.fromTo('#house-one', 2.5,
+        {y:0, opacity:1},
+        {y:'-=100', opacity:1, ease: "steps(5)"}) 
+        .fromTo('#heart-3', 2.5,{y:0},{y:'-=100', ease: "steps(5)"},'-=2.5')
+        */
+        //.fromTo('#house-two', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.5')
+        //.fromTo('#heart-1', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
+        //.fromTo('#house-fade-out', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
+      }
+      
+  //pause the tl
+  phoneEnter.pause();
+  //target the tl based on user interaction
+   $($phoneContainer).mouseenter(function(){
+     phoneEnter.play();
+   });
+   $($phoneContainer).mouseleave(function(){
+     phoneEnter.pause().progress(0);
+   });
+
+        
    
       
       ($dollarContainer).mouseenter(function () {
