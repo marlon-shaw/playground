@@ -24,7 +24,7 @@ $(document).ready(function () {
     $lineTwo = $('#line-two'),
     $lineThree = $('#line-three'),
     $staticSet = [$heartOne,$houseTwo,$house] 
-    //$hearts = [$heartOne, $heartThree],
+    $bubbleCollection = [$heartOne, $heartThree, $houseOne,$houseTwo],
     //$houses = [$house, $houseOne, $houseTwo],
     $lines = [$lineOne, $lineTwo, $lineThree],
     $pen = $('#pen')
@@ -33,8 +33,8 @@ $(document).ready(function () {
   
 
   //create a tl
-  var phoneEnterMaster = new TimelineMax({ repeat: -1 });
-  var steppedEase  = new SteppedEase(2);
+  var phoneEnterMaster = new TimelineMax({repeat: -1, paused:true});
+  var steppedEase  = new SteppedEase(4);
   //var phoneExit = new TimelineMax();
   var dollarTlEnter = new TimelineMax({paused:true, reversed:true});
   var dollarTlExit = new TimelineMax();
@@ -46,18 +46,27 @@ $(document).ready(function () {
     var tl = new TimelineMax();
       tl
         
-        .fromTo($heartFadeIn, 1,{
-          opacity:0, y:10, rotation:-15, scale:0.8
+        .fromTo($heartFadeIn, .5,{
+          y:35, rotation:-15, scale:0.8, opacity:0
         },{
-            y: -5, opacity: 1, rotation: 0, scale: 1, ease: "back.out(1.7)"
-        });
-        
+            y:30, opacity: 1, rotation: 0, scale: 1, ease: "back.out(1.7)"
+        })
+        return tl;
+  }
+  function rotB2(){
+    var tl = new TimelineMax();
+      tl
+      .fromTo($houseFadeIn, .5,
+        {y:40, rotation:15, scale:0.8, opacity:0},
+        {y:35,opacity:1, rotation:0, scale: 1,ease: "back.out(1.7)"})
         return tl;
   }
   function moveUp(){
     var tl = new TimelineMax();
       tl
-        .fromTo($heartFadeIn, 1.75, { y:-5 }, { y: -50, ease: steppedEase})
+        .fromTo($bubbleCollection, 2.5, {y:0},{ y: -80, ease:steppedEase})
+        //.fromTo($heartFadeIn, 1.5, { y:"4px"}, { y: "-4px"})
+        
         return tl;
   }
 
@@ -68,86 +77,48 @@ $(document).ready(function () {
     .set($bubbles, {onStart: onStart})      
     function onStart(){
         phoneEnterMaster
-          .add(rotB())
           .add(moveUp())
-          ;
-
-          /*
-          .fromTo($heartFadeIn, 2,{y:0},{y:-50,ease:steppedEase})
-          .fromTo($houseFadeIn, 2,{y:0},{y:-50, ease:steppedEase},"-=1.75") 
-          */  
-
-
-          /*
-          .fromTo($heartFadeIn, .75, {x:2, y:40, opacity:0},{x:0, y:30, opacity:1})       
-          .fromTo($houseOne, 0.25, {y:0},{y:-10})
-          .fromTo($heartThree, 0.5, {y:0},{y:-15})
-          .fromTo($staticSet, 1,{y:0},{y:-20},'-=1.25')
-          .fromTo($houseFadeIn, .5, {x:-10, y:40, opacity:0},{x:0, y:30, opacity:1})
-          */      
+          .add(rotB())          
+          .add(rotB2())
           
-         /*
-          .staggerFrom($bubbles, .5,{transformOrigin:"50% bottom", opacity:0, cycle:{x: [-5, 1], rotationY:[45, 180]}, ease:Back.easeIn, rotation:45}) 
-          .staggerTo($bubbles, 1.5,{opacity:1, cycle:{y:[-25,-30]}}, '-=0.15')
-        */
-      }
-      
-      
-      
-          //.fromTo($houseFadeIn, .5,{y:30},{y:20})
-          //.fromTo($heartFadeIn, .5,{y:30},{y:15})
-
-
-        /*.fromTo('#house-one', 2.5,
-        {y:0, opacity:1},
-        {y:'-=100', opacity:1, ease: "steps(5)"}) 
-        .fromTo('#heart-3', 2.5,{y:0},{y:'-=100', ease: "steps(5)"},'-=2.5')
-        */
-        //.fromTo('#house-two', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.5')
-        //.fromTo('#heart-1', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
-        //.fromTo('#house-fade-out', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
-      
-      
-  //pause the tl
-  phoneEnterMaster.pause();
-  //target the tl based on user interaction
+          ;
+    }
+  
+    //pause the tl
+    phoneEnterMaster.pause();
+    //target the tl based on user interaction
    $($phoneContainer).mouseenter(function(){
      phoneEnterMaster.play();
    });
    $($phoneContainer).mouseleave(function(){
      phoneEnterMaster.pause().progress(0);
+      
    });
+    
+($dollarContainer).mouseenter(function () {
+  //console.log('You hovered the dollar');
+  dollarTlEnter
+    //.fromTo($blobOne,{scaleY:.75},{scaleY:.9, duration:.5, ease:Power1.easeInOut, transformOrigin:"center center"})
+    .to($topDollar, {rotation:10, duration:.6, ease:Power1.easeInOut, transformOrigin:"center center"})
+    .fromTo($arcArrows, {rotationX:"0"},{rotation:20, duration:.5, transformOrigin:"center center"},"-=1")   
+    
+    if(dollarTlEnter.paused() === true ){
+      dollarTlEnter.play();
+    }else{
+      dollarTlEnter.reverse().resume();
+    }          
+});
+ $($dollarContainer).mouseleave(function(){
+  //console.log('You are no longer hovering dollar');
+    
+    dollarTlExit
+    .to($arcArrows, {duration: .5,rotation:0, transformOrigin:"center center",ease:Power1.easeInOut},"rollBack")
+    //.fromTo($blobOne, {scaleY:1},{scaleY:.85,duration:1,ease:Power1.easeInOut}, "-=.5")
+    .to($blobOne, {duration:1,rotation:"-=.5",transformOrigin: "center center", ease:Power1.easeInOut})
+    .to($topDollar, {duration: .5, rotation:4, ease:Power1.easeInOut},"-=rollBack")         
+    
+});
 
-        
-   
-      
-      ($dollarContainer).mouseenter(function () {
-        //console.log('You hovered the dollar');
-        dollarTlEnter
-          //.fromTo($blobOne,{scaleY:.75},{scaleY:.9, duration:.5, ease:Power1.easeInOut, transformOrigin:"center center"})
-          .to($blobOne, {duration:1,rotation:"+=.5",transformOrigin: "center center", ease:Power1.easeInOut})           
-          .to($topDollar, {rotation:10, duration:.6, ease:Power1.easeInOut, transformOrigin:"center center"},"-=.75")
-          .fromTo($arcArrows, {rotationX:"0"},{rotation:20, duration:.5, transformOrigin:"center center"},"-=1")   
-          
-          if(dollarTlEnter.paused() === true ){
-            dollarTlEnter.play();
-          }else{
-            dollarTlEnter.reverse().resume();
-          }          
-      });
-      
-    /*
-      $($dollarContainer).mouseleave(function(){
-        //console.log('You are no longer hovering dollar');
-          
-          dollarTlExit
-          .to($arcArrows, {duration: .5,rotation:0, transformOrigin:"center center",ease:Power1.easeInOut},"rollBack")
-          //.fromTo($blobOne, {scaleY:1},{scaleY:.85,duration:1,ease:Power1.easeInOut}, "-=.5")
-          .to($blobOne, {duration:1,rotation:"-=.5",transformOrigin: "center center", ease:Power1.easeInOut})
-          .to($topDollar, {duration: .5, rotation:4, ease:Power1.easeInOut},"-=rollBack")         
-         
-      });
-    */
     
       $($docContainer).mouseenter(function(){
         //console.log('You have entered Doc');        
@@ -165,8 +136,7 @@ $(document).ready(function () {
         docTlExit
           .to($blobTwo, {duration: 1.5,rotation:-5, transformOrigin:"center center",ease:Power1.easeInOut})
           .fromTo($docShadow,{x:-15},{x:0, duration:.75},"-=moveShadow")
-          .to($pen, {duration:1,x:0, y:0, ease:Power1.easeOutIn})
-          
+          .to($pen, {duration:1,x:0, y:0, ease:Power1.easeOutIn})         
           
       });
 
