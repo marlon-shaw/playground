@@ -33,8 +33,8 @@ $(document).ready(function () {
   
 
   //create a tl
-  var phoneEnter = new TimelineMax({repeat:-1});
-  var steppedEase  = new SteppedEase(4);
+  var phoneEnterMaster = new TimelineMax({ repeat: -1 });
+  var steppedEase  = new SteppedEase(2);
   //var phoneExit = new TimelineMax();
   var dollarTlEnter = new TimelineMax({paused:true, reversed:true});
   var dollarTlExit = new TimelineMax();
@@ -42,22 +42,40 @@ $(document).ready(function () {
   var docTlExit = new TimelineMax();
   var toggleMenu = new TimelineMax({paused: true, reversed:true});
 
+  function rotB(){
+    var tl = new TimelineMax();
+      tl
+        
+        .fromTo($heartFadeIn, 1,{
+          opacity:0, y:10, rotation:-15, scale:0.8
+        },{
+            y: -5, opacity: 1, rotation: 0, scale: 1, ease: "back.out(1.7)"
+        });
+        
+        return tl;
+  }
+  function moveUp(){
+    var tl = new TimelineMax();
+      tl
+        .fromTo($heartFadeIn, 1.75, { y:-5 }, { y: -50, ease: steppedEase})
+        return tl;
+  }
+
+  
   //establish the timelinee
   
-  phoneEnter
-    
-      .set($bubbles, {onStart: onStart, onUpdate: onUpdate})      
-      function onStart(){
-        phoneEnter
-          
-          .fromTo($heartFadeIn, 2,
-            {y:0},
-            {y:-50, ease:steppedEase}
-          )
-          .fromTo($houseFadeIn, 2,
-            {y:0},
-            {y:-50, ease:steppedEase},"-=1.75" 
-          )   
+  phoneEnterMaster
+    .set($bubbles, {onStart: onStart})      
+    function onStart(){
+        phoneEnterMaster
+          .add(rotB())
+          .add(moveUp())
+          ;
+
+          /*
+          .fromTo($heartFadeIn, 2,{y:0},{y:-50,ease:steppedEase})
+          .fromTo($houseFadeIn, 2,{y:0},{y:-50, ease:steppedEase},"-=1.75") 
+          */  
 
 
           /*
@@ -75,10 +93,7 @@ $(document).ready(function () {
       }
       
       
-      function onUpdate(){
-        phoneEnter
-         
-          .to($houseOne, .5,{y:-10})
+      
           //.fromTo($houseFadeIn, .5,{y:30},{y:20})
           //.fromTo($heartFadeIn, .5,{y:30},{y:15})
 
@@ -91,16 +106,16 @@ $(document).ready(function () {
         //.fromTo('#house-two', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.5')
         //.fromTo('#heart-1', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
         //.fromTo('#house-fade-out', 2.5, {y:0},{y:'-=100', ease:"steps(5)"},'-=2.75')
-      }
+      
       
   //pause the tl
-  phoneEnter.pause();
+  phoneEnterMaster.pause();
   //target the tl based on user interaction
    $($phoneContainer).mouseenter(function(){
-     phoneEnter.play();
+     phoneEnterMaster.play();
    });
    $($phoneContainer).mouseleave(function(){
-     phoneEnter.pause().progress(0);
+     phoneEnterMaster.pause().progress(0);
    });
 
         
