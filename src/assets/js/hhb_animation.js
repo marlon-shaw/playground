@@ -43,29 +43,34 @@ $(document).ready(function () {
   var toggleMenu = new TimelineMax({paused: true, reversed:true});
 
   function rotB(){
-    var tl = new TimelineMax();
-      tl        
-        .fromTo($heartFadeIn, .5,{x:15, y:35, rotation:45, scale:0.8, opacity:0},{x:0, y:30, opacity: 1, rotation: 0, scale: 1})
-        .to($heartFadeIn, 2,{y:-50, ease:steppedEase})
-        //.to($heartFadeIn, 2,{y:-50, ease:steppedEase})
-        return tl;
+    var tlHeart = new TimelineMax();
+      tlHeart       
+        .fromTo($heartFadeIn, .25,{x:15, y:35, rotation:45, scale:0.8, opacity:0},{x:0, y:20, opacity: 1, rotation: 0, scale: 1})
+        .fromTo($bubbleCollection, .25,{y:0},{ y: '-5px', ease:steppedEase},"moveCollectionUp")
+        .to($heartFadeIn, 2,{y:-50, ease:steppedEase}, "moveCollectionUp")
+        .to($heartFadeIn, .50,{opacity:0})
+        //start the house bubble
+                
+        return tlHeart;
+        
   }
   function rotB2(){
-    var tl = new TimelineMax();
-      tl
-      .fromTo($houseFadeIn, .5,
-        {y:40, rotation:15, scale:0.8, opacity:0},
-        {y:35,opacity:1, rotation:0, scale: 1,ease: "back.out(1.7)"})
-        return tl;
+    var tlHouse = new TimelineMax();
+      tlHouse
+      .fromTo($houseFadeIn, .25, {x:-15, y:40, rotation:-45, scale:0.8, opacity:0},{x:0,y:35,opacity:1, rotation:0, scale: 1})
+      .to($houseFadeIn, 1.5,{y:-50, ease:steppedEase},'-=.15')
+      .to($houseFadeIn, .50,{opacity:0})
+        return tlHouse;
+        
   }
-  /*function moveUp(){
+
+  function moveUp(){
     var tl = new TimelineMax();
       tl
-        .fromTo($bubbleCollection, 2.5, {y:0},{ y: -80, ease:steppedEase})
-        //.fromTo($heartFadeIn, 1.5, { y:"4px"}, { y: "-4px"})
+        .fromTo($bubbleCollection, 1.5,{y:0},{ y: -80, ease:steppedEase},"moveCollectionUp")
         
         return tl;
-  }*/
+  }
 
   
   //establish the timelinee
@@ -74,10 +79,11 @@ $(document).ready(function () {
     .set($bubbles, {onStart: onStart})      
     function onStart(){
         phoneEnterMaster
-          //.add(moveUp())
-          .add(rotB())          
-          .add(rotB2())
           
+          .add(rotB())  
+          .add(moveUp(),'-=2.25')          
+          .add(rotB2(),'-=2.25')    
+              
           ;
     }
   
@@ -88,7 +94,7 @@ $(document).ready(function () {
      phoneEnterMaster.play();
    });
    $($phoneContainer).mouseleave(function(){
-     phoneEnterMaster.pause().progress(0);
+     phoneEnterMaster.progress(0).pause();
       
    });
     
