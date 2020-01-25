@@ -86,7 +86,7 @@ $(document).ready(function () {
                  
           phoneEnterMaster.add(bubblesUp())  
                     
-          phoneEnterMaster.add(fadeInBubbles().reverse())   
+           
           ;
       }
   
