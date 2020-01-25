@@ -9,10 +9,16 @@
   //transform: translate
   transform-origin:center center;
 }
-//#heart-fade-in{visibility: hidden;}
-//#house-fade-in{visibility: hidden;}
-#house-fade-out{visibility: hidden;}
-//#heart-1{visibility: hidden;}
-//#heart-3{visibility: hidden;}
-//#house-two{visibility: hidden;}
-//#house-one{visibility: hidden;}
+
+//#house3{visibility: hidden;}
+//#heart3{visibility: hidden;}
+//#house2{visibility: hidden;}
+//#house1{visibility: hidden;}
+//#heart1{visibility: hidden;}
+#heart0{visibility: hidden;}
+#house0{visibility: hidden;}
+#bubble-collection-anim{
+  height:60px;
+  overflow: hidden;
+  border: 1px solid red;
+}
